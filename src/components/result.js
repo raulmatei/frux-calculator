@@ -1,4 +1,5 @@
 import React from 'react';
+import { Textfit } from 'react-textfit';
 
 const operators = {
   43: '+',
@@ -26,21 +27,29 @@ export default (props) => {
     <div>
       <div className='expression'></div>
       <div className='last'>
-        {
-          expression.map((item, index) => {
-            if (typeof item === 'string' && item !== '.') {
-              return (
-                <span key={index} className='operator'>
-                  {operators[item.charCodeAt(0)]}
-                </span>
-              );
-            }
+        <Textfit
+          min={8}
+          max={28}
+          mode='single'
+          perfectFit
+          forceSingleModeWidth={false}
+        >
+          {
+            expression.map((item, index) => {
+              if (typeof item === 'string' && item !== '.') {
+                return (
+                  <span key={index} className='operator'>
+                    {operators[item.charCodeAt(0)]}
+                  </span>
+                );
+              }
 
-            return (
-              <span key={index}>{item}</span>
-            );
-          })
-        }
+              return (
+                <span key={index}>{item}</span>
+              );
+            })
+          }
+        </Textfit>
       </div>
     </div>
   );
